@@ -1,0 +1,432 @@
+/* 30–45 second continuous lantern story. */
+.catcher-art {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  aspect-ratio: 3 / 4;
+}
+.catch-idle { background-image: url('../assets/characters/oli/story/normal.png'); }
+.catch-left { background-image: url('../assets/characters/oli/game/run-left.png'); }
+.catch-right { background-image: url('../assets/characters/oli/game/run-right.png'); }
+.catch-success { background-image: url('../assets/characters/oli/game/success.png'); }
+.catch-shock { background-image: url('../assets/characters/oli/game/shock.png'); }
+.catch-dizzy { background-image: url('../assets/characters/oli/game/dizzy.png'); }
+.catch-fever { background-image: url('../assets/characters/oli/game/fever.png'); }
+.catch-proud { background-image: url('../assets/characters/oli/game/proud.png'); }
+.catch-mooncake { background-image: url('../assets/characters/oli/game/catch-mooncake.png'); }
+.catch-yolk { background-image: url('../assets/characters/oli/game/catch-yolk.png'); }
+.catch-osmanthus { background-image: url('../assets/characters/oli/game/catch-osmanthus.png'); }
+.catch-star { background-image: url('../assets/characters/oli/game/catch-star.png'); }
+.catch-chili { background-image: url('../assets/characters/oli/game/catch-chili.png'); }
+.catch-onion { background-image: url('../assets/characters/oli/game/catch-onion.png'); }
+.catch-super { background-image: url('../assets/characters/oli/game/catch-super.png'); }
+.catch-golden { background-image: url('../assets/characters/oli/game/catch-golden.png'); }
+
+/* Individual transparent files replace the old sprite atlas, preventing neighboring art from bleeding in. */
+.story-art { background-size: contain; background-position: center; background-repeat: no-repeat; }
+.story-moon { background-image: url('../assets/characters/oli/story/normal.png'); }
+.story-play { background-image: url('../assets/characters/oli/game/jump.png'); }
+.story-brush { background-image: url('../assets/characters/oli/story/tilt.png'); }
+.story-rabbit { background-image: url('../assets/characters/oli/game/surprised.png'); }
+.story-lantern { background-image: url('../assets/characters/oli/game/pray.png'); }
+.story-sleep { background-image: url('../assets/characters/oli/game/pray.png'); }
+.story-dance { background-image: url('../assets/characters/oli/game/catch-super.png'); }
+.story-wave { background-image: url('../assets/characters/oli/game/jump.png'); }
+
+.catch-stage .fall-zone > .player { width: 270px; bottom: -5%; }
+.game-start-countdown {
+  position: absolute; inset: 0; z-index: 72; display: grid; place-items: center;
+  color: #fff4bd; background: #07102c69; backdrop-filter: blur(2px);
+  font: 900 clamp(74px, 15vw, 160px)/1 "DFKai-SB", "KaiTi", serif;
+  text-shadow: 0 4px 0 #7f4d3f, 0 0 38px #ffcf61;
+  pointer-events: none;
+}
+.game-start-countdown[hidden] { display: none; }
+.game-start-countdown.beat { animation: gameCountBeat .7s ease-out; }
+@keyframes gameCountBeat { from { opacity: .2; scale: .55; } 55% { opacity: 1; scale: 1.08; } to { opacity: .82; scale: 1; } }
+
+.short-story .vn-character[data-character="oli"] .vn-sprite {
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.short-story .vn-scene-title,
+.short-story .vn-speaker { display: none; }
+
+.short-story .vn-background { background-position: center; }
+.short-story::after {
+  background: linear-gradient(180deg, #06102a0d 28%, #060c2335 62%, #04071bd6 100%);
+  transition: backdrop-filter .8s ease, background .8s ease;
+}
+.short-story .vn-cast { inset: 2vh 0 132px; }
+.short-story .vn-character { width: min(25vw, 48vh); }
+.short-story .vn-brother { left: 3%; }
+.short-story .vn-phoebe { left: 25%; }
+.short-story .vn-dad { right: 24%; }
+.short-story .vn-oli { left: auto; right: 3%; width: min(20vw, 36vh); }
+.short-story .vn-character.is-speaking { scale: 1.07; filter: brightness(1.12) saturate(1.08) drop-shadow(0 18px 24px #000a); }
+.short-story .vn-character.is-speaking::after {
+  content: '✦'; position: absolute; left: 50%; top: 4%; translate: -50%;
+  color: #ffe390; font-size: 28px; text-shadow: 0 0 18px #ffc94c;
+  animation: speakerSpark .75s ease-in-out infinite alternate;
+}
+.short-story .vn-dialogue {
+  bottom: 16px; min-height: 104px; padding: 22px 78px 20px 28px;
+  border-color: #f2d381aa; background: linear-gradient(135deg, #111a3ff2, #25183cf0);
+}
+.short-story .vn-text { max-width: 900px; margin-inline: auto; text-align: center; font-size: clamp(18px, 2vw, 24px); }
+.short-story .vn-thought {
+  left: auto; right: 4%; bottom: 54%; padding: 12px 17px; font-size: 26px;
+  color: #fff3c1; background: linear-gradient(145deg,#111c45f5,#25183df5);
+  border: 2px solid #e7c06e; border-radius: 18px 18px 18px 6px;
+  box-shadow: 0 12px 28px #0207199c, inset 0 0 0 1px #fff3c52e;
+}
+.short-story .vn-thought::after { left: 72%; background: #19183f; border-color: #e7c06e; }
+.short-story .vn-story-lantern {
+  position: absolute; z-index: 6; left: 75%; bottom: 128px; translate: -50%;
+  width: 126px; height: 168px; opacity: .9;
+  background: url('../assets/props/wish-lantern.png') center / contain no-repeat;
+  filter: drop-shadow(0 0 26px #ffb04d);
+  transition: left 1s cubic-bezier(.22,.8,.2,1), bottom 1s cubic-bezier(.22,.8,.2,1), scale 1s cubic-bezier(.22,.8,.2,1), filter .8s, opacity .6s;
+}
+.short-story .vn-story-lantern.noticed { animation: lanternNotice 1.2s ease-in-out infinite alternate; }
+.short-story.invite-viewer .vn-phoebe { z-index: 8; scale: 1.1; }
+.short-story.lantern-handoff::after { background: #05091eb8; backdrop-filter: blur(7px); }
+.short-story.lantern-handoff .vn-cast,
+.short-story.lantern-handoff .vn-thought { opacity: 0; transition: opacity .65s ease; }
+.short-story.lantern-handoff .vn-story-lantern {
+  left: 50%; bottom: calc(50% - 128px); scale: 1.58; opacity: 1; z-index: 50;
+  filter: drop-shadow(0 0 55px #ffc25d);
+}
+
+.story-wish-transition {
+  background-image: linear-gradient(#07112b82,#07112bd4), url('../assets/backgrounds/story/lantern-terrace-v2.png');
+  background-position: center; background-size: cover;
+  height: 100svh; min-height: 0; overflow: hidden;
+  grid-template-columns: 1.12fr .88fr; padding: clamp(18px, 3vw, 42px) 5vw;
+}
+.story-wish-transition .wish-copy { max-height: calc(100svh - 36px); padding: 20px 24px; animation: wishUiIn .75s .08s both; }
+.story-wish-transition .wish-copy > p { margin: 0 0 4px; }
+.story-wish-transition .wish-copy h1 { margin: 3px 0 9px; font-size: clamp(38px, 4.5vw, 58px); }
+.story-wish-transition .wish-copy textarea { height: 92px; margin: 6px 0 10px; }
+.story-wish-transition .wish-suggestions { margin-block: 7px; }
+.story-wish-transition .lantern-editor { margin: 5px 0 10px; padding: 9px 12px; }
+.story-wish-transition .wish-meta { margin: -2px 0 10px; }
+.story-wish-transition .lantern-stage { height: 86vh; }
+.story-wish-transition .wish-lantern { width: min(300px, 28vw); }
+.story-wish-transition .lantern-stage { animation: lanternUiIn .8s both; }
+
+/* Reference-led ending: title, actions, dialogue rail, then characters. */
+.festival-ending { height: 100svh; min-height: 640px; overflow: hidden; }
+.ending-title { top: 1.5vh; }
+.ending-title h1 { margin: 2px 0 0; font-size: clamp(54px, 6.3vw, 92px); }
+.ending-actions { top: 21vh; }
+.ending-cast { inset: 32vh 2vw 0; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cast-member { height: 68vh; }
+.character-bubble {
+  top: 0; width: calc(100% - 14px); max-width: 290px; min-height: 82px;
+  padding: 12px 15px; line-height: 1.55; overflow-wrap: anywhere;
+}
+.character-bubble b { display: block; color: #703f3a; font-size: 14px; }
+.cast-member img { bottom: 0; }
+.cast-brother img, .cast-father img { height: min(53vh, 555px); }
+.cast-phoebe img { height: min(49vh, 515px); }
+.cast-oli .ending-oli { width: min(19vw, 240px); }
+
+@keyframes speakerSpark { to { translate: -50% -7px; opacity: .55; } }
+@keyframes lanternNotice { to { translate: -50% -8px; filter: drop-shadow(0 0 34px #ffd780); } }
+@keyframes wishUiIn { from { opacity: 0; translate: -24px 0; } }
+@keyframes lanternUiIn { from { opacity: .35; scale: 1.18; } }
+
+@media (max-width: 900px) {
+  .short-story .vn-cast { inset: 1vh 0 32vh; }
+  .short-story .vn-character { width: min(25vw, 43vh); }
+  .short-story .vn-brother { left: 2%; }
+  .short-story .vn-phoebe { left: 25%; }
+  .short-story .vn-dad { right: 23%; }
+  .short-story .vn-oli { right: 1%; width: min(20vw, 33vh); }
+  .short-story .vn-dialogue { min-height: 29vh; padding: 22px 62px 13px 18px; }
+  .short-story .vn-story-lantern { width: 82px; height: 110px; right: auto; left: 70%; bottom: 31vh; translate: -50%; }
+  .short-story.lantern-handoff .vn-story-lantern { left: 50%; right: auto; bottom: calc(50% - 72px); translate: -50%; scale: 1.55; }
+  .short-story .vn-thought { right: 2%; bottom: 56%; font-size: 19px; }
+}
+
+@media (max-width: 900px) and (min-height: 651px) {
+  .festival-ending { min-height: 1360px; }
+  .short-story .vn-cast { inset: 10vh 0 36vh; }
+  .short-story .vn-character { width: min(44vw, 31vh); }
+  .short-story .vn-brother { left: -7%; }
+  .short-story .vn-phoebe { left: 19%; }
+  .short-story .vn-dad { right: -4%; }
+  .short-story .vn-oli { right: 2%; bottom: -5%; width: min(32vw, 23vh); }
+  .short-story .vn-story-lantern { bottom: 38vh; }
+  .festival-ending { height: auto; min-height: 100svh; overflow-y: auto; }
+  .ending-title { top: 44px; }
+  .ending-actions { top: 168px; }
+  .ending-cast { position: relative; inset: auto; margin-top: 235px; grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 0; }
+  .cast-member { height: 410px; min-height: 0; }
+  .cast-member img, .cast-brother img, .cast-father img { height: 310px; max-width: 150%; }
+  .cast-phoebe img { height: 290px; max-width: 150%; }
+  .cast-oli .ending-oli { width: 150px; }
+  .character-bubble { width: calc(100% - 10px); min-height: 96px; font-size: 11px; line-height: 1.45; }
+  .story-wish-transition { height: auto; min-height: 100svh; overflow-y: auto; grid-template-columns: 1fr; padding: 72px 18px 18px; }
+  .story-wish-transition .wish-copy { max-height: none; padding: 20px 17px; }
+  .story-wish-transition .wish-copy h1 { font-size: 35px; }
+  .story-wish-transition .lantern-stage { height: 46vh; }
+  .story-wish-transition .wish-lantern { width: 155px; }
+}
+
+/* Keep the countdown separate from the written wish and let the lantern feel farther away. */
+.lantern-stage.cinematic .wish-lantern {
+  width: min(230px, 46vw);
+  height: min(292px, 54vh);
+  padding: 34px 28px;
+}
+.lantern-stage.cinematic .wish-lantern span {
+  max-width: 165px;
+  font-size: clamp(14px, 1.6vw, 20px);
+  line-height: 1.45;
+}
+.lantern-stage.cinematic .launch-countdown {
+  top: max(18px, calc(50% - 238px));
+  min-width: 0;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ffe7a8a8;
+  border-radius: 50%;
+  background: #0c163bd9;
+  box-shadow: 0 0 28px #ffc65f55, inset 0 0 18px #fff2bd1c;
+  font-size: 48px;
+}
+
+/* The ending uses three protected bands: title, controls, and cast/dialogue. */
+.festival-ending { min-height: 100svh; }
+.ending-title { top: clamp(10px, 1.5vh, 22px); }
+.ending-title h1 { line-height: 1.02; }
+.ending-actions { top: clamp(142px, 21vh, 188px); }
+.ending-cast { inset: clamp(218px, 31vh, 288px) 1.5vw 0; gap: clamp(2px, 1vw, 18px); }
+.cast-member { min-width: 0; }
+.character-bubble {
+  width: min(292px, 22vw);
+  min-height: 88px;
+  max-height: 126px;
+  overflow: hidden;
+  padding: 12px 15px;
+  font-size: clamp(11px, 1vw, 15px);
+  line-height: 1.48;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 1100px) and (max-height: 650px) and (orientation: landscape) {
+  .festival-ending { height: 100svh; min-height: 100svh; overflow: hidden; }
+  .ending-title { top: 5px; }
+  .ending-title > span, .ending-title p { display: none; }
+  .ending-title h1 { margin: 0; font-size: clamp(38px, 10vh, 58px); }
+  .ending-actions { top: 12vh; }
+  .ending-actions .cta { padding: 8px 14px; font-size: 12px; }
+  .ending-link { padding: 6px 8px; font-size: 11px; }
+  .ending-cast { inset: 23vh 1vw 0; grid-template-columns: repeat(4, minmax(0, 1fr)); min-height: 0; }
+  .cast-member { height: 77vh; min-height: 0; }
+  .character-bubble { width: 23vw; min-height: 64px; max-height: 82px; padding: 7px 9px; font-size: 10px; line-height: 1.32; }
+  .character-bubble b { margin-bottom: 1px; font-size: 11px; }
+  .cast-member img, .cast-brother img, .cast-father img { height: min(48vh, 330px); }
+  .cast-phoebe img { height: min(45vh, 310px); }
+  .cast-oli .ending-oli { width: min(17vw, 150px); }
+  .lantern-stage.cinematic .wish-lantern { width: min(180px, 34vw); height: min(225px, 58vh); padding: 25px 22px; }
+  .lantern-stage.cinematic .launch-countdown { top: 14px; width: 58px; height: 58px; font-size: 34px; }
+}
+
+@media (max-width: 900px) and (min-height: 651px) {
+  .festival-ending { min-height: 1360px; }
+  .ending-title { top: 24px; }
+  .ending-actions { top: 154px; }
+  .ending-cast { margin-top: 224px; padding: 0 8px 22px; gap: 12px 4px; }
+  .cast-member { height: 390px; }
+  .character-bubble { width: calc(100% - 8px); min-height: 92px; max-height: 118px; font-size: 11px; }
+  .lantern-stage.cinematic .wish-lantern { width: min(175px, 44vw); height: 230px; padding: 28px 20px; }
+  .lantern-stage.cinematic .launch-countdown { top: max(18px, calc(50% - 205px)); width: 62px; height: 62px; font-size: 38px; }
+}
+
+@media (max-width: 520px) and (min-height: 651px) {
+  .festival-ending { min-height: 1160px; }
+  .ending-title { top: 16px; }
+  .ending-actions { top: 132px; }
+  .ending-cast { margin-top: 198px; min-height: 0; }
+  .cast-member { height: 330px; }
+  .cast-member img, .cast-brother img, .cast-father img { height: 245px; }
+  .cast-phoebe img { height: 228px; }
+  .cast-oli .ending-oli { width: 132px; }
+  .character-bubble { min-height: 88px; max-height: 112px; padding: 8px 9px; font-size: 10.5px; line-height: 1.38; }
+  .character-bubble b { font-size: 12px; }
+}
+
+@media (max-width: 900px) {
+  .lantern-stage.cinematic .launch-countdown {
+    left: 18px;
+    top: 64px;
+    translate: 0;
+  }
+}
+
+/* Wish scene: the whole family quietly gathers around the same lantern. */
+.story-wish-transition .wish-lantern { width: min(360px, 32vw); }
+.wish-prayer-cast {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  opacity: 0; visibility: hidden; translate: 0 16px;
+  transition: opacity .65s ease, translate .65s ease, visibility .65s;
+}
+.wish-screen.is-launching .wish-prayer-cast { opacity: 1; visibility: visible; translate: 0; }
+.wish-prayer { position: absolute; bottom: 1%; margin: 0; display: grid; place-items: end center; }
+.wish-prayer img { display: block; width: auto; height: min(34vh, 300px); max-width: 100%; object-fit: contain; object-position: bottom; filter: drop-shadow(0 14px 16px #0009); }
+.wish-prayer-brother { left: -8%; }
+.wish-prayer-father { left: 10%; }
+.wish-prayer-phoebe { right: 8%; }
+.wish-prayer-oli { right: -5%; }
+.wish-prayer-oli img { height: min(24vh, 210px); }
+.wish-lantern { z-index: 6; }
+
+.lantern-stage.cinematic .wish-prayer-cast { position: fixed; inset: 0; z-index: 4; }
+.lantern-stage.cinematic .wish-prayer img { height: min(42vh, 410px); opacity: .95; }
+.lantern-stage.cinematic .wish-prayer-brother { left: 5%; }
+.lantern-stage.cinematic .wish-prayer-father { left: 20%; }
+.lantern-stage.cinematic .wish-prayer-phoebe { right: 18%; }
+.lantern-stage.cinematic .wish-prayer-oli { right: 5%; }
+.lantern-stage.cinematic .wish-prayer-oli img { height: min(31vh, 290px); }
+.lantern-stage.cinematic .wish-lantern { width: min(260px, 48vw); height: min(330px, 58vh); }
+
+/* Utility actions live at the edge so the greeting remains the focal point. */
+.ending-actions {
+  width: auto;
+  top: auto;
+  right: 18px;
+  bottom: 18px;
+  left: auto;
+  translate: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+.ending-actions .cta, .ending-actions .ending-link { min-width: 128px; padding: 9px 12px; font-size: 12px; text-align: center; }
+.cast-oli { translate: -42px 0; }
+.festival-ending .cast-member { pointer-events: auto; cursor: pointer; border-radius: 28px; outline: none; }
+.festival-ending .cast-member:hover img,
+.festival-ending .cast-member:focus-visible img,
+.festival-ending .cast-member:hover .ending-oli,
+.festival-ending .cast-member:focus-visible .ending-oli { filter: brightness(1.08) drop-shadow(0 0 18px #ffe59a88) drop-shadow(0 20px 24px #0009); }
+.festival-ending .cast-member:focus-visible { box-shadow: inset 0 0 0 2px #ffe29a99; }
+.character-bubble.is-changing { animation: blessingSwap .38s ease-out both; }
+@keyframes blessingSwap { from { opacity: .2; transform: translateX(-50%) translateY(8px) scale(.96); } }
+
+@media (max-width: 900px) and (min-height: 651px) {
+  .story-wish-transition .wish-lantern { width: 190px; }
+  .wish-prayer img { height: min(21vh, 180px); }
+  .wish-prayer-brother { left: -2%; }
+  .wish-prayer-father { left: 18%; }
+  .wish-prayer-phoebe { right: 17%; }
+  .wish-prayer-oli { right: -1%; }
+  .wish-prayer-oli img { height: min(16vh, 140px); }
+  .lantern-stage.cinematic .wish-prayer img { height: min(27vh, 220px); }
+  .lantern-stage.cinematic .wish-prayer-brother { left: -1%; }
+  .lantern-stage.cinematic .wish-prayer-father { left: 18%; }
+  .lantern-stage.cinematic .wish-prayer-phoebe { right: 17%; }
+  .lantern-stage.cinematic .wish-prayer-oli { right: 0; }
+  .lantern-stage.cinematic .wish-prayer-oli img { height: min(20vh, 170px); }
+  .lantern-stage.cinematic .wish-lantern { width: min(205px, 50vw); height: 270px; }
+  .ending-actions { width: auto; top: 150px; right: 10px; bottom: auto; flex-direction: column; flex-wrap: nowrap; }
+  .ending-actions .cta, .ending-actions .ending-link { min-width: 104px; padding: 8px 9px; font-size: 10px; }
+  .cast-oli { translate: 0; }
+}
+
+@media (max-width: 1100px) and (max-height: 650px) {
+  .catch-stage .fall-zone > .player { width: 180px; bottom: -6%; }
+  .lantern-stage.cinematic .wish-prayer img { height: min(43vh, 170px); }
+  .lantern-stage.cinematic .wish-prayer-oli img { height: min(32vh, 125px); }
+  .ending-actions { top: auto; right: 8px; bottom: 8px; flex-direction: column; }
+  .ending-actions .cta, .ending-actions .ending-link { min-width: 96px; padding: 6px 8px; font-size: 9px; }
+  .cast-oli { translate: -58px 0; }
+}
+
+@media (max-width: 520px) and (min-height: 651px) {
+  .catch-stage .fall-zone > .player { width: 170px; bottom: -2%; }
+  .short-story .vn-oli { right: -11%; width: min(40vw, 25vh); }
+  .short-story .vn-story-lantern { left: 52%; bottom: 34vh; width: 94px; height: 126px; }
+  .short-story .vn-thought { right: 4%; bottom: 61%; }
+}
+
+/* Final landscape presentation: one desktop-like composition at every playable size. */
+.lantern-stage.cinematic {
+  background:
+    linear-gradient(180deg, #06102a30, #05091ecf),
+    url('../assets/backgrounds/story/lantern-terrace-v2.png') center / cover no-repeat;
+}
+.lantern-stage.cinematic .wish-prayer img { height: min(57vh, 520px); }
+.lantern-stage.cinematic .wish-prayer-brother { left: 1.5%; }
+.lantern-stage.cinematic .wish-prayer-father { left: 16%; }
+.lantern-stage.cinematic .wish-prayer-phoebe { right: 16%; }
+.lantern-stage.cinematic .wish-prayer-oli { right: 1.5%; }
+.lantern-stage.cinematic .wish-prayer-oli img { height: min(45vh, 390px); }
+.lantern-stage.cinematic .wish-lantern {
+  width: min(340px, 32vw);
+  height: min(420px, 66vh);
+  padding: 46px 36px;
+}
+.lantern-stage.cinematic .wish-lantern span { max-width: 205px; font-size: clamp(16px, 1.75vw, 23px); }
+.lantern-stage.cinematic .launch-countdown { top: max(12px, calc(50% - 282px)); }
+
+.ending-title h1 { font-size: clamp(76px, 8.6vw, 126px); }
+.ending-cast { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 1vw, 18px); }
+.character-bubble {
+  width: 22.2vw;
+  max-width: none;
+  height: 96px;
+  min-height: 96px;
+  max-height: 96px;
+}
+
+@media (max-width: 1100px) and (max-height: 650px) and (orientation: landscape) {
+  #app, .cover-screen { height: 100svh; min-height: 100svh; overflow: hidden; }
+  .lantern-stage.cinematic .wish-prayer img { height: min(62vh, 265px); }
+  .lantern-stage.cinematic .wish-prayer-brother { left: 1%; }
+  .lantern-stage.cinematic .wish-prayer-father { left: 17%; }
+  .lantern-stage.cinematic .wish-prayer-phoebe { right: 17%; }
+  .lantern-stage.cinematic .wish-prayer-oli { right: 1%; }
+  .lantern-stage.cinematic .wish-prayer-oli img { height: min(50vh, 205px); }
+  .lantern-stage.cinematic .wish-lantern { width: min(245px, 29vw); height: min(305px, 78vh); padding: 32px 25px; }
+  .lantern-stage.cinematic .launch-countdown { left: 50%; top: 5px; translate: -50%; }
+  .ending-title h1 { font-size: clamp(48px, 12vh, 72px); }
+  .character-bubble { width: 22.2vw; height: 82px; min-height: 82px; max-height: 82px; }
+}
+
+@media (max-width: 1180px) and (orientation: portrait) {
+  html, body { overflow: hidden; }
+  .rotate-hint {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    width: auto;
+    max-width: none;
+    padding: 32px;
+    display: grid;
+    place-content: center;
+    gap: 12px;
+    color: #fff1bd;
+    background:
+      linear-gradient(#07112bcf, #07112bf2),
+      url('../assets/backgrounds/moon-chase-stage.png') center / cover no-repeat;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    translate: 0;
+    text-align: center;
+    font: 900 clamp(22px, 6vw, 38px)/1.55 "DFKai-SB", "KaiTi", serif;
+    pointer-events: auto;
+  }
+  .rotate-hint::before { content: '↻'; font: 900 64px/1 Georgia, serif; color: #ffd879; animation: rotateDevice 1.8s ease-in-out infinite; }
+  .rotate-hint small { color: #dfe5ff; font: 700 14px/1.6 "Microsoft JhengHei", sans-serif; }
+}
+
+@keyframes rotateDevice { 50% { rotate: 90deg; scale: 1.08; } }

@@ -1,0 +1,40 @@
+/* Production-safe Oli atlas: transparent gutters prevent neighboring poses bleeding in. */
+.catcher-art { background-image: url('../assets/characters/oli/oli-catcher-sprites-v2.png'); }
+
+/* Compact landscape layout for phones and small tablets. */
+@media (max-width: 950px) and (max-height: 600px) {
+  .game-shell, #gameMount { height: 100svh; min-height: 100svh; }
+  .catch-stage { height: 100svh; min-height: 100svh; }
+  .catch-hud { left: 2%; right: 52px; top: 1%; height: auto; display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 5px; }
+  .catch-logo { display: none; }
+  .catch-hud .hud-chip,
+  .catch-hud .hearts,
+  .catch-hud .combo-box { height: 40px; min-width: 0; border-width: 1px; border-radius: 12px; padding: 4px 7px; font-size: 12px; }
+  .catch-hud .hearts { font-size: 13px; }
+  .catch-hud .combo-box span { font-size: 10px; }
+  .fever-meter { position: absolute; top: 44px; left: 0; width: 58vw; height: 25px; border-width: 1px; }
+  .guide-scroll { display: none; }
+  .fall-zone { inset: 12% 0 18%; }
+  .player { width: 105px; bottom: 0; }
+  .fall-item { width: 62px; }
+  .item-super, .item-golden { width: 76px; }
+  .catch-message { top: 12%; font-size: 10px; padding: 5px 8px; }
+  .catch-controls { bottom: 10px; }
+  .catch-controls button { width: 58px; height: 58px; font-size: 22px; border-width: 2px; }
+  .tutorial { padding: 6px; }
+  .tutorial-card { width: min(610px, 90vw); padding: 10px 18px; border-radius: 20px; }
+  .tutorial-card h1 { font-size: 24px; }
+  .tutorial-demo { height: 112px; }
+  .demo-treat { top: 0; font-size: 30px; animation: demoDropCompact 1.5s ease-in infinite; }
+  .demo-arrow { top: 34px; font-size: 20px; }
+  .demo-oli { width: 72px; bottom: 1px; }
+  .tutorial-card p { margin: 3px 0; font-size: 12px; }
+  .tutorial-rules { margin: 7px 0 9px; font-size: 11px; }
+  .tutorial-rules span { padding: 5px 8px; }
+  .tutorial-card .cta { padding: 9px 18px; }
+}
+
+@keyframes demoDropCompact {
+  0% { transform: translateY(0); }
+  70%, 100% { transform: translateY(62px); }
+}
