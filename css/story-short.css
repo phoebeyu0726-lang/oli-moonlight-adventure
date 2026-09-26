@@ -84,7 +84,7 @@
 }
 .short-story .vn-thought::after { left: 72%; background: #19183f; border-color: #e7c06e; }
 .short-story .vn-story-lantern {
-  position: absolute; z-index: 6; left: 75%; bottom: 128px; translate: -50%;
+  position: absolute; z-index: 6; left: 80%; bottom: 128px; translate: -50%;
   width: 126px; height: 168px; opacity: .9;
   background: url('../assets/props/wish-lantern.png') center / contain no-repeat;
   filter: drop-shadow(0 0 26px #ffb04d);
@@ -147,7 +147,7 @@
   .short-story .vn-dad { right: 23%; }
   .short-story .vn-oli { right: 1%; width: min(20vw, 33vh); }
   .short-story .vn-dialogue { min-height: 29vh; padding: 22px 62px 13px 18px; }
-  .short-story .vn-story-lantern { width: 82px; height: 110px; right: auto; left: 70%; bottom: 31vh; translate: -50%; }
+  .short-story .vn-story-lantern { width: 82px; height: 110px; right: auto; left: 77%; bottom: 31vh; translate: -50%; }
   .short-story.lantern-handoff .vn-story-lantern { left: 50%; right: auto; bottom: calc(50% - 72px); translate: -50%; scale: 1.55; }
   .short-story .vn-thought { right: 2%; bottom: 56%; font-size: 19px; }
 }
@@ -311,7 +311,7 @@
   gap: 6px;
 }
 .ending-actions .cta, .ending-actions .ending-link { min-width: 128px; padding: 9px 12px; font-size: 12px; text-align: center; }
-.cast-oli { translate: -42px 0; }
+.cast-oli { translate: 18px 0; }
 .festival-ending .cast-member { pointer-events: auto; cursor: pointer; border-radius: 28px; outline: none; }
 .festival-ending .cast-member:hover img,
 .festival-ending .cast-member:focus-visible img,
@@ -347,13 +347,13 @@
   .lantern-stage.cinematic .wish-prayer-oli img { height: min(32vh, 125px); }
   .ending-actions { top: auto; right: 8px; bottom: 8px; flex-direction: column; }
   .ending-actions .cta, .ending-actions .ending-link { min-width: 96px; padding: 6px 8px; font-size: 9px; }
-  .cast-oli { translate: -58px 0; }
+  .cast-oli { translate: 8px 0; }
 }
 
 @media (max-width: 520px) and (min-height: 651px) {
   .catch-stage .fall-zone > .player { width: 170px; bottom: -2%; }
   .short-story .vn-oli { right: -11%; width: min(40vw, 25vh); }
-  .short-story .vn-story-lantern { left: 52%; bottom: 34vh; width: 94px; height: 126px; }
+  .short-story .vn-story-lantern { left: 70%; bottom: 34vh; width: 94px; height: 126px; }
   .short-story .vn-thought { right: 4%; bottom: 61%; }
 }
 
@@ -363,12 +363,12 @@
     linear-gradient(180deg, #06102a30, #05091ecf),
     url('../assets/backgrounds/story/lantern-terrace-v2.png') center / cover no-repeat;
 }
-.lantern-stage.cinematic .wish-prayer img { height: min(57vh, 520px); }
+.lantern-stage.cinematic .wish-prayer img { height: min(63vh, 575px); }
 .lantern-stage.cinematic .wish-prayer-brother { left: 1.5%; }
 .lantern-stage.cinematic .wish-prayer-father { left: 16%; }
 .lantern-stage.cinematic .wish-prayer-phoebe { right: 16%; }
 .lantern-stage.cinematic .wish-prayer-oli { right: 1.5%; }
-.lantern-stage.cinematic .wish-prayer-oli img { height: min(45vh, 390px); }
+.lantern-stage.cinematic .wish-prayer-oli img { height: min(32vh, 285px); }
 .lantern-stage.cinematic .wish-lantern {
   width: min(340px, 32vw);
   height: min(420px, 66vh);
@@ -389,12 +389,12 @@
 
 @media (max-width: 1100px) and (max-height: 650px) and (orientation: landscape) {
   #app, .cover-screen { height: 100svh; min-height: 100svh; overflow: hidden; }
-  .lantern-stage.cinematic .wish-prayer img { height: min(62vh, 265px); }
+  .lantern-stage.cinematic .wish-prayer img { height: min(68vh, 285px); }
   .lantern-stage.cinematic .wish-prayer-brother { left: 1%; }
   .lantern-stage.cinematic .wish-prayer-father { left: 17%; }
   .lantern-stage.cinematic .wish-prayer-phoebe { right: 17%; }
   .lantern-stage.cinematic .wish-prayer-oli { right: 1%; }
-  .lantern-stage.cinematic .wish-prayer-oli img { height: min(50vh, 205px); }
+  .lantern-stage.cinematic .wish-prayer-oli img { height: min(34vh, 145px); }
   .lantern-stage.cinematic .wish-lantern { width: min(245px, 29vw); height: min(305px, 78vh); padding: 32px 25px; }
   .lantern-stage.cinematic .launch-countdown { left: 50%; top: 5px; translate: -50%; }
   .ending-title h1 { font-size: clamp(48px, 12vh, 72px); }

@@ -3,6 +3,7 @@ import { CatchGame } from './catch-game.js';
 import { playMoonStory } from './story-player.js';
 import { FestivalMusic } from './music.js';
 import { claimPlayerName, fetchSharedLeaderboard, normalizeName, saveLocalBest, submitSharedScore } from './leaderboard.js';
+import { preloadGameAssets } from './preloader.js';
 
 const app = document.querySelector('#app');
 const soundBtn = document.querySelector('#soundBtn');
@@ -576,4 +577,36 @@ async function ending(name, result, wishText) {
   });
 }
 
-cover();
+async function boot() {
+  const loader = document.querySelector('.asset-loader');
+  const bar = loader.querySelector('.loader-bar');
+  const track = loader.querySelector('.loader-track');
+  const count = loader.querySelector('#loaderCount');
+  const percent = loader.querySelector('#loaderPercent');
+  const message = loader.querySelector('#loaderMessage');
+  const retry = loader.querySelector('#loaderRetry');
+
+  retry.hidden = true;
+  message.textContent = '第一次進入會需要一點時間，載好後遊戲會更流暢。';
+  const result = await preloadGameAssets(({ completed, total, percent: value }) => {
+    bar.style.width = `${value}%`;
+    track.setAttribute('aria-valuenow', value);
+    count.textContent = completed ? `已載入 ${completed} / ${total}` : '準備中…';
+    percent.textContent = `${value}%`;
+  });
+
+  if (result.failed.length) {
+    message.textContent = `有 ${result.failed.length} 個月光素材尚未載好，請檢查網路後重試。`;
+    retry.hidden = false;
+    retry.onclick = boot;
+    return;
+  }
+
+  message.textContent = '月光素材準備完成！';
+  cover();
+  document.body.classList.remove('is-loading');
+  requestAnimationFrame(() => loader.classList.add('is-ready'));
+  setTimeout(() => loader.remove(), 520);
+}
+
+boot();

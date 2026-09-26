@@ -1,0 +1,32 @@
+body.is-loading { overflow: hidden; }
+body.is-loading #app, body.is-loading .sound, body.is-loading #stars { visibility: hidden; }
+.asset-loader {
+  position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center;
+  color: #fff5ca;
+  background:
+    linear-gradient(#07112bc9, #07112bf2),
+    url('../assets/backgrounds/moon-chase-stage.png') center / cover no-repeat;
+  transition: opacity .45s ease, visibility .45s ease;
+}
+.asset-loader.is-ready { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-card { width: min(520px, 84vw); text-align: center; }
+.loader-moon {
+  width: 92px; aspect-ratio: 1; margin: 0 auto 20px; border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #fff9cf, #ffd66f 62%, #d79038);
+  box-shadow: 0 0 60px #ffd56caa; animation: loaderMoon 1.7s ease-in-out infinite alternate;
+}
+.loader-card h1 { margin: 0 0 8px; font: 900 clamp(28px, 5vw, 46px)/1.2 "DFKai-SB", "KaiTi", serif; }
+.loader-card p { min-height: 1.6em; margin: 0 0 18px; color: #e3e8ff; }
+.loader-track { height: 14px; overflow: hidden; border: 1px solid #ffe7a9aa; border-radius: 999px; background: #0a1237; box-shadow: inset 0 3px 8px #0008; }
+.loader-bar { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ffb65d, #fff2a6); box-shadow: 0 0 18px #ffd66d; transition: width .22s ease; }
+.loader-status { display: flex; justify-content: space-between; margin-top: 9px; color: #ffe9a7; font-weight: 800; }
+.loader-retry { margin-top: 18px; }
+.loader-retry[hidden] { display: none; }
+@keyframes loaderMoon { to { translate: 0 -7px; scale: 1.04; box-shadow: 0 0 82px #ffda70d9; } }
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .loader-card { width: min(470px, 72vw); }
+  .loader-moon { width: 62px; margin-bottom: 10px; }
+  .loader-card h1 { font-size: 27px; }
+  .loader-card p { margin-bottom: 10px; font-size: 12px; }
+}
