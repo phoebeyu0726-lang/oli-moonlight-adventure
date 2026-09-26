@@ -1,19 +1,19 @@
 const BASE_ASSETS = [
-  'assets/backgrounds/moon-chase-stage.png',
-  'assets/backgrounds/catch-game-concept.png',
-  'assets/backgrounds/ending-festival-bg.png',
-  'assets/backgrounds/story/lantern-terrace-v2.png',
-  'assets/characters/brother/brother-poses-v1.png',
-  'assets/characters/dad/dad-poses-v1.png',
-  'assets/characters/phoebe/phoebe-poses-v1.png',
-  'assets/items/falling-treats-v2.png',
-  'assets/props/wish-lantern.png',
-  'assets/characters/family/prayer-brother.png',
-  'assets/characters/family/prayer-father.png',
-  'assets/characters/family/prayer-phoebe.png',
-  'assets/characters/family/young-man-hanfu.png',
-  'assets/characters/family/father-hanfu-v3.png',
-  'assets/characters/family/young-woman-hanfu.png',
+  'assets/backgrounds/moon-chase-stage.webp',
+  'assets/backgrounds/catch-game-concept.webp',
+  'assets/backgrounds/ending-festival-bg.webp',
+  'assets/backgrounds/story/lantern-terrace-v2.webp',
+  'assets/characters/brother/brother-poses-v1.webp',
+  'assets/characters/dad/dad-poses-v1.webp',
+  'assets/characters/phoebe/phoebe-poses-v1.webp',
+  'assets/items/falling-treats-v2.webp',
+  'assets/props/wish-lantern.webp',
+  'assets/characters/family/prayer-brother.webp',
+  'assets/characters/family/prayer-father.webp',
+  'assets/characters/family/prayer-phoebe.webp',
+  'assets/characters/family/young-man-hanfu.webp',
+  'assets/characters/family/father-hanfu-v3.webp',
+  'assets/characters/family/young-woman-hanfu.webp',
 ];
 
 const OLI_GAME_POSES = [
@@ -21,11 +21,11 @@ const OLI_GAME_POSES = [
   'catch-osmanthus', 'catch-star', 'catch-super', 'catch-yolk',
   'dizzy', 'fever', 'idle', 'jump', 'pray', 'proud',
   'run-left', 'run-right', 'shock', 'success', 'surprised',
-].map((name) => `assets/characters/oli/game/${name}.png`);
+].map((name) => `assets/characters/oli/game/${name}.webp`);
 
 const OLI_STORY_POSES = [
   'happy', 'jump', 'normal', 'run-left', 'run-right', 'surprised', 'tilt', 'wish',
-].map((name) => `assets/characters/oli/story/${name}.png`);
+].map((name) => `assets/characters/oli/story/${name}.webp`);
 
 export const PRELOAD_ASSETS = [...new Set([...BASE_ASSETS, ...OLI_GAME_POSES, ...OLI_STORY_POSES])];
 

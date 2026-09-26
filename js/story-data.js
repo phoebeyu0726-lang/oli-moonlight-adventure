@@ -1,29 +1,29 @@
 export const STORY_ASSETS = {
   backgrounds: {
-    lantern: 'assets/backgrounds/story/lantern-terrace-v2.png',
+    lantern: 'assets/backgrounds/story/lantern-terrace-v2.webp',
     home: 'assets/backgrounds/story/home-night-v1.png',
     road: 'assets/backgrounds/story/lantern-road-v1.png',
     hill: 'assets/backgrounds/story/moon-hill-v1.png',
     ending: 'assets/backgrounds/story/ending-back-view-v1.png',
   },
   characters: {
-    phoebe: 'assets/characters/phoebe/phoebe-poses-v1.png',
-    brother: 'assets/characters/brother/brother-poses-v1.png',
-    dad: 'assets/characters/dad/dad-poses-v1.png',
+    phoebe: 'assets/characters/phoebe/phoebe-poses-v1.webp',
+    brother: 'assets/characters/brother/brother-poses-v1.webp',
+    dad: 'assets/characters/dad/dad-poses-v1.webp',
     oli: 'assets/characters/oli/oli-novel-poses-v1.png',
     moon: 'assets/characters/moon/moon-messenger-poses-v1.png',
   },
 };
 
 export const OLI_POSE_ASSETS = {
-  normal: 'assets/characters/oli/story/normal.png',
-  happy: 'assets/characters/oli/story/happy.png',
-  tilt: 'assets/characters/oli/story/tilt.png',
-  surprised: 'assets/characters/oli/story/surprised.png',
-  runLeft: 'assets/characters/oli/story/run-left.png',
-  runRight: 'assets/characters/oli/story/run-right.png',
-  wish: 'assets/characters/oli/story/wish.png',
-  jump: 'assets/characters/oli/story/jump.png',
+  normal: 'assets/characters/oli/story/normal.webp',
+  happy: 'assets/characters/oli/story/happy.webp',
+  tilt: 'assets/characters/oli/story/tilt.webp',
+  surprised: 'assets/characters/oli/story/surprised.webp',
+  runLeft: 'assets/characters/oli/story/run-left.webp',
+  runRight: 'assets/characters/oli/story/run-right.webp',
+  wish: 'assets/characters/oli/story/wish.webp',
+  jump: 'assets/characters/oli/story/jump.webp',
 };
 
 export const CHARACTER_POSES = {

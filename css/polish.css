@@ -119,7 +119,7 @@
   height: auto;
   aspect-ratio: 2 / 3;
   padding: 30% 21% 26%;
-  background: url('../assets/props/wish-lantern.png') center / contain no-repeat;
+  background: url('../assets/props/wish-lantern.webp') center / contain no-repeat;
   clip-path: none;
   filter: drop-shadow(0 0 26px #ffad45) drop-shadow(0 20px 28px #0007);
   isolation: isolate;
@@ -132,8 +132,8 @@
   inset: 1%;
   z-index: -1;
   background: var(--lantern-tint);
-  -webkit-mask: url('../assets/props/wish-lantern.png') center / contain no-repeat;
-  mask: url('../assets/props/wish-lantern.png') center / contain no-repeat;
+  -webkit-mask: url('../assets/props/wish-lantern.webp') center / contain no-repeat;
+  mask: url('../assets/props/wish-lantern.webp') center / contain no-repeat;
   mix-blend-mode: color;
   opacity: .72;
 }
@@ -280,7 +280,7 @@ p, label, .tier-message, .blessing-wish { line-break: strict; text-wrap: pretty;
   background:
     radial-gradient(circle at 50% 23%, #fff7bd3b 0 14%, transparent 35%),
     linear-gradient(#07102a4d, #07102ab8),
-    url('../assets/backgrounds/moon-chase-stage.png') center / cover;
+    url('../assets/backgrounds/moon-chase-stage.webp') center / cover;
 }
 .cover-screen::after {
   content: '';
@@ -370,7 +370,7 @@ p, label, .tier-message, .blessing-wish { line-break: strict; text-wrap: pretty;
   background:
     radial-gradient(circle at 50% 30%, #fff4a62c, transparent 33%),
     linear-gradient(#07112c7d, #080f2deb),
-    url('../assets/backgrounds/moon-chase-stage.png') center / cover;
+    url('../assets/backgrounds/moon-chase-stage.webp') center / cover;
 }
 .blessing-card {
   z-index: 5;
@@ -474,13 +474,13 @@ p, label, .tier-message, .blessing-wish { line-break: strict; text-wrap: pretty;
 /* Final production fixes: resilient game art, playful wish type, festival-first ending. */
 .catch-stage {
   background-color: #101a42;
-  background-image: var(--stage), url('../assets/backgrounds/moon-chase-stage.png');
+  background-image: var(--stage), url('../assets/backgrounds/moon-chase-stage.webp');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 .fall-item {
-  background-image: url('../assets/items/falling-treats-v2.png');
+  background-image: url('../assets/items/falling-treats-v2.webp');
   background-size: 400% 200%;
 }
 .festival-ending {
@@ -491,7 +491,7 @@ p, label, .tier-message, .blessing-wish { line-break: strict; text-wrap: pretty;
   place-items: center;
   padding: 24px 18px;
   background-color: #101a42;
-  background-image: var(--ending-bg), url('../assets/backgrounds/ending-festival-bg.png');
+  background-image: var(--ending-bg), url('../assets/backgrounds/ending-festival-bg.webp');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

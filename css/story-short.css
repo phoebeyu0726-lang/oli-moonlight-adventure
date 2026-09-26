@@ -5,33 +5,33 @@
   background-repeat: no-repeat;
   aspect-ratio: 3 / 4;
 }
-.catch-idle { background-image: url('../assets/characters/oli/story/normal.png'); }
-.catch-left { background-image: url('../assets/characters/oli/game/run-left.png'); }
-.catch-right { background-image: url('../assets/characters/oli/game/run-right.png'); }
-.catch-success { background-image: url('../assets/characters/oli/game/success.png'); }
-.catch-shock { background-image: url('../assets/characters/oli/game/shock.png'); }
-.catch-dizzy { background-image: url('../assets/characters/oli/game/dizzy.png'); }
-.catch-fever { background-image: url('../assets/characters/oli/game/fever.png'); }
-.catch-proud { background-image: url('../assets/characters/oli/game/proud.png'); }
-.catch-mooncake { background-image: url('../assets/characters/oli/game/catch-mooncake.png'); }
-.catch-yolk { background-image: url('../assets/characters/oli/game/catch-yolk.png'); }
-.catch-osmanthus { background-image: url('../assets/characters/oli/game/catch-osmanthus.png'); }
-.catch-star { background-image: url('../assets/characters/oli/game/catch-star.png'); }
-.catch-chili { background-image: url('../assets/characters/oli/game/catch-chili.png'); }
-.catch-onion { background-image: url('../assets/characters/oli/game/catch-onion.png'); }
-.catch-super { background-image: url('../assets/characters/oli/game/catch-super.png'); }
-.catch-golden { background-image: url('../assets/characters/oli/game/catch-golden.png'); }
+.catch-idle { background-image: url('../assets/characters/oli/story/normal.webp'); }
+.catch-left { background-image: url('../assets/characters/oli/game/run-left.webp'); }
+.catch-right { background-image: url('../assets/characters/oli/game/run-right.webp'); }
+.catch-success { background-image: url('../assets/characters/oli/game/success.webp'); }
+.catch-shock { background-image: url('../assets/characters/oli/game/shock.webp'); }
+.catch-dizzy { background-image: url('../assets/characters/oli/game/dizzy.webp'); }
+.catch-fever { background-image: url('../assets/characters/oli/game/fever.webp'); }
+.catch-proud { background-image: url('../assets/characters/oli/game/proud.webp'); }
+.catch-mooncake { background-image: url('../assets/characters/oli/game/catch-mooncake.webp'); }
+.catch-yolk { background-image: url('../assets/characters/oli/game/catch-yolk.webp'); }
+.catch-osmanthus { background-image: url('../assets/characters/oli/game/catch-osmanthus.webp'); }
+.catch-star { background-image: url('../assets/characters/oli/game/catch-star.webp'); }
+.catch-chili { background-image: url('../assets/characters/oli/game/catch-chili.webp'); }
+.catch-onion { background-image: url('../assets/characters/oli/game/catch-onion.webp'); }
+.catch-super { background-image: url('../assets/characters/oli/game/catch-super.webp'); }
+.catch-golden { background-image: url('../assets/characters/oli/game/catch-golden.webp'); }
 
 /* Individual transparent files replace the old sprite atlas, preventing neighboring art from bleeding in. */
 .story-art { background-size: contain; background-position: center; background-repeat: no-repeat; }
-.story-moon { background-image: url('../assets/characters/oli/story/normal.png'); }
-.story-play { background-image: url('../assets/characters/oli/game/jump.png'); }
-.story-brush { background-image: url('../assets/characters/oli/story/tilt.png'); }
-.story-rabbit { background-image: url('../assets/characters/oli/game/surprised.png'); }
-.story-lantern { background-image: url('../assets/characters/oli/game/pray.png'); }
-.story-sleep { background-image: url('../assets/characters/oli/game/pray.png'); }
-.story-dance { background-image: url('../assets/characters/oli/game/catch-super.png'); }
-.story-wave { background-image: url('../assets/characters/oli/game/jump.png'); }
+.story-moon { background-image: url('../assets/characters/oli/story/normal.webp'); }
+.story-play { background-image: url('../assets/characters/oli/game/jump.webp'); }
+.story-brush { background-image: url('../assets/characters/oli/story/tilt.webp'); }
+.story-rabbit { background-image: url('../assets/characters/oli/game/surprised.webp'); }
+.story-lantern { background-image: url('../assets/characters/oli/game/pray.webp'); }
+.story-sleep { background-image: url('../assets/characters/oli/game/pray.webp'); }
+.story-dance { background-image: url('../assets/characters/oli/game/catch-super.webp'); }
+.story-wave { background-image: url('../assets/characters/oli/game/jump.webp'); }
 
 .catch-stage .fall-zone > .player { width: 270px; bottom: -5%; }
 .game-start-countdown {
@@ -86,7 +86,7 @@
 .short-story .vn-story-lantern {
   position: absolute; z-index: 6; left: 80%; bottom: 128px; translate: -50%;
   width: 126px; height: 168px; opacity: .9;
-  background: url('../assets/props/wish-lantern.png') center / contain no-repeat;
+  background: url('../assets/props/wish-lantern.webp') center / contain no-repeat;
   filter: drop-shadow(0 0 26px #ffb04d);
   transition: left 1s cubic-bezier(.22,.8,.2,1), bottom 1s cubic-bezier(.22,.8,.2,1), scale 1s cubic-bezier(.22,.8,.2,1), filter .8s, opacity .6s;
 }
@@ -101,7 +101,7 @@
 }
 
 .story-wish-transition {
-  background-image: linear-gradient(#07112b82,#07112bd4), url('../assets/backgrounds/story/lantern-terrace-v2.png');
+  background-image: linear-gradient(#07112b82,#07112bd4), url('../assets/backgrounds/story/lantern-terrace-v2.webp');
   background-position: center; background-size: cover;
   height: 100svh; min-height: 0; overflow: hidden;
   grid-template-columns: 1.12fr .88fr; padding: clamp(18px, 3vw, 42px) 5vw;
@@ -361,7 +361,7 @@
 .lantern-stage.cinematic {
   background:
     linear-gradient(180deg, #06102a30, #05091ecf),
-    url('../assets/backgrounds/story/lantern-terrace-v2.png') center / cover no-repeat;
+    url('../assets/backgrounds/story/lantern-terrace-v2.webp') center / cover no-repeat;
 }
 .lantern-stage.cinematic .wish-prayer img { height: min(63vh, 575px); }
 .lantern-stage.cinematic .wish-prayer-brother { left: 1.5%; }
@@ -416,7 +416,7 @@
     color: #fff1bd;
     background:
       linear-gradient(#07112bcf, #07112bf2),
-      url('../assets/backgrounds/moon-chase-stage.png') center / cover no-repeat;
+      url('../assets/backgrounds/moon-chase-stage.webp') center / cover no-repeat;
     border: 0;
     border-radius: 0;
     box-shadow: none;

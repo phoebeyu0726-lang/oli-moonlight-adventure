@@ -391,10 +391,10 @@ function wish(name, result, afterLaunch = null, fromStory = false) {
       <div class="lantern-stage">
         <div class="launch-countdown" aria-live="polite"></div>
         <div class="wish-prayer-cast" aria-label="Phoebe、弟弟、爸爸和 Oli 一起為願望祈福">
-          <figure class="wish-prayer wish-prayer-brother"><img src="assets/characters/family/prayer-brother.png" alt="弟弟閉上眼睛陪你一起祈福"></figure>
-          <figure class="wish-prayer wish-prayer-father"><img src="assets/characters/family/prayer-father.png" alt="爸爸閉上眼睛陪你一起祈福"></figure>
-          <figure class="wish-prayer wish-prayer-phoebe"><img src="assets/characters/family/prayer-phoebe.png" alt="Phoebe 閉上眼睛陪你一起祈福"></figure>
-          <figure class="wish-prayer wish-prayer-oli"><img src="assets/characters/oli/game/pray.png" alt="Oli 閉上眼睛一起祈福"></figure>
+          <figure class="wish-prayer wish-prayer-brother"><img src="assets/characters/family/prayer-brother.webp" alt="弟弟閉上眼睛陪你一起祈福"></figure>
+          <figure class="wish-prayer wish-prayer-father"><img src="assets/characters/family/prayer-father.webp" alt="爸爸閉上眼睛陪你一起祈福"></figure>
+          <figure class="wish-prayer wish-prayer-phoebe"><img src="assets/characters/family/prayer-phoebe.webp" alt="Phoebe 閉上眼睛陪你一起祈福"></figure>
+          <figure class="wish-prayer wish-prayer-oli"><img src="assets/characters/oli/game/pray.webp" alt="Oli 閉上眼睛一起祈福"></figure>
         </div>
         <div class="wish-lantern" data-color="amber" data-size="medium" role="img" aria-label="寫著玩家願望的精緻中秋天燈">
           <span id="lanternWords">在這裡寫下願望</span>

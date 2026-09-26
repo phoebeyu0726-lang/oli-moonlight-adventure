@@ -5,7 +5,7 @@ body.is-loading #app, body.is-loading .sound, body.is-loading #stars { visibilit
   color: #fff5ca;
   background:
     linear-gradient(#07112bc9, #07112bf2),
-    url('../assets/backgrounds/moon-chase-stage.png') center / cover no-repeat;
+    url('../assets/backgrounds/moon-chase-stage.webp') center / cover no-repeat;
   transition: opacity .45s ease, visibility .45s ease;
 }
 .asset-loader.is-ready { opacity: 0; visibility: hidden; pointer-events: none; }
