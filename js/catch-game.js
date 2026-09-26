@@ -102,12 +102,14 @@ export class CatchGame {
       const direction = Number(button.dataset.dir);
       const on = (event) => {
         event.preventDefault();
+        event.currentTarget.setPointerCapture?.(event.pointerId);
         this.keys[direction < 0 ? 'l' : 'r'] = 1;
         this.nudge(direction);
         button.classList.add('active');
       };
       const off = (event) => {
         event.preventDefault();
+        if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
         this.keys[direction < 0 ? 'l' : 'r'] = 0;
         button.classList.remove('active');
       };
@@ -115,6 +117,7 @@ export class CatchGame {
       button.onpointerup = off;
       button.onpointercancel = off;
       button.onpointerleave = off;
+      button.oncontextmenu = (event) => event.preventDefault();
     });
 
     this.root.querySelector('#ready').onclick = () => {

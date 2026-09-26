@@ -31,7 +31,10 @@ function say(message, tone = 'normal') {
 }
 
 function updateSound() {
-  soundBtn.textContent = sound ? '🔊' : '🔇';
+  soundBtn.textContent = sound ? '♫' : '♪';
+  soundBtn.classList.toggle('is-muted', !sound);
+  soundBtn.setAttribute('aria-pressed', String(sound));
+  soundBtn.setAttribute('aria-label', sound ? '關閉音樂與音效' : '開啟音樂與音效');
 }
 
 soundBtn.onclick = () => {
@@ -150,7 +153,7 @@ function wishReply(wishText, score) {
 }
 
 function wrapWish(text, size) {
-  const perLine = { large: 7, medium: 10, small: 13 }[size] || 10;
+  const perLine = { large: 6, medium: 8, small: 10 }[size] || 8;
   const clean = text.replace(/\s+/g, ' ').trim();
   const lines = [];
   for (let index = 0; index < clean.length; index += perLine) lines.push(clean.slice(index, index + perLine));

@@ -1,0 +1,237 @@
+/* Device-safe controls and compact landscape layouts. Loaded last on purpose. */
+button,
+.sound,
+.catch-controls,
+.catch-stage,
+.game-start-countdown {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button { touch-action: manipulation; }
+.catch-stage,
+.catch-controls button { touch-action: none; }
+textarea,
+input { -webkit-user-select: text; user-select: text; }
+
+.sound {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font: 900 24px/1 Georgia, "Times New Roman", serif;
+  color: #fff0b6;
+}
+.sound.is-muted { color: #9fa8c9; opacity: .82; }
+
+/* Keep every written wish inside the lantern's two inner frame lines. */
+.wish-lantern span,
+.lantern-stage.cinematic .wish-lantern span {
+  top: 24%;
+  bottom: 20%;
+  left: 23%;
+  width: 54%;
+  max-width: none;
+  padding-top: 2%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  white-space: pre-line;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+@media (orientation: landscape) and (max-width: 1366px) and (max-height: 820px) {
+  html,
+  body,
+  #app { width: 100%; height: 100%; min-height: 100%; overflow: hidden; overscroll-behavior: none; }
+
+  .sound {
+    top: max(7px, env(safe-area-inset-top));
+    right: max(7px, env(safe-area-inset-right));
+    width: 42px;
+    height: 42px;
+    border: 2px solid #d6b66e;
+    border-radius: 50%;
+    background: #111a3ee8;
+    box-shadow: 0 5px 14px #0008;
+    font-size: 21px;
+  }
+
+  /* Name screen: remove duplicated branding and size everything by viewport height. */
+  .intro-screen {
+    width: 100%;
+    height: 100svh;
+    min-height: 0;
+    padding: max(10px, env(safe-area-inset-top)) 4vw max(10px, env(safe-area-inset-bottom));
+    align-items: center;
+  }
+  .intro-brand { display: none; }
+  .intro-story { width: min(56vw, 480px); max-height: 96svh; }
+  .intro-story > p { margin: 0 0 3px; font-size: clamp(11px, 2.5vh, 16px); }
+  .intro-story h1 { margin: 0 0 8px; font-size: clamp(32px, 9vh, 54px); line-height: 1.03; }
+  .intro-dialogue { margin-bottom: 8px; padding: 9px 13px; font-size: clamp(11px, 2.5vh, 15px); line-height: 1.45; }
+  .intro-story label { font-size: 11px; }
+  .intro-story input { margin: 4px 0 8px; padding: 9px 12px; min-height: 42px; font-size: 14px; }
+  .intro-actions { display: flex; gap: 8px; flex-wrap: nowrap; }
+  .intro-actions .cta,
+  .intro-actions .secondary { padding: 9px 13px; font-size: 12px; white-space: nowrap; }
+  .intro-oli { right: 5vw; bottom: -4%; width: min(27vw, 210px) !important; }
+
+  /* Game HUD uses two tidy rows and leaves most of the sky visible. */
+  .game-shell,
+  #gameMount,
+  .catch-stage { width: 100%; height: 100svh; min-height: 0; }
+  .catch-hud {
+    left: max(8px, env(safe-area-inset-left));
+    right: max(56px, calc(env(safe-area-inset-right) + 50px));
+    top: max(6px, env(safe-area-inset-top));
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .catch-logo { display: none; }
+  .catch-hud .hud-chip,
+  .catch-hud .hearts,
+  .catch-hud .combo-box,
+  .catch-hud .fever-meter {
+    position: static;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 32px;
+    margin: 0;
+    padding: 3px 8px;
+    border-width: 1px;
+    border-radius: 11px;
+    font-size: clamp(11px, 2.5vh, 15px);
+    box-shadow: 0 4px 9px #0006;
+  }
+  .catch-hud .hearts {
+    justify-content: center;
+    color: #ff7180;
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
+    font-size: clamp(13px, 3vh, 18px);
+    letter-spacing: 1px;
+  }
+  .catch-hud .combo-box { grid-column: 1 / 3; height: 24px; padding: 2px 7px; gap: 2px; }
+  .catch-hud .combo-box span { font-size: 9px; line-height: 1; }
+  .catch-hud .combo-box div,
+  .catch-hud .fever-meter div { height: 4px; }
+  .catch-hud .fever-meter { grid-column: 3; height: 24px; display: flex; gap: 5px; }
+  .catch-hud .fever-meter b { font-size: 16px; }
+  .catch-message {
+    top: max(69px, calc(env(safe-area-inset-top) + 65px));
+    left: 50%;
+    right: auto;
+    width: min(62vw, 520px);
+    transform: translateX(-50%);
+    padding: 5px 9px;
+    border-width: 1px;
+    font-size: clamp(9px, 2.2vh, 12px);
+    line-height: 1.25;
+    text-align: center;
+  }
+  .fall-zone { inset: 76px 0 54px; }
+  .catch-stage .fall-zone > .player { width: clamp(82px, 15vh, 108px); bottom: -6px; }
+  .fall-item { width: clamp(46px, 9vh, 62px); }
+  .item-super,
+  .item-golden { width: clamp(54px, 11vh, 72px); }
+
+  .catch-controls { position: absolute; inset: 0; display: block; pointer-events: none; }
+  .catch-controls button {
+    position: absolute;
+    bottom: max(7px, env(safe-area-inset-bottom));
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    display: grid;
+    place-content: center;
+    gap: 0;
+    border: 2px solid #d9b96e;
+    border-radius: 50%;
+    background: linear-gradient(#1d2d58ee, #11183be8);
+    color: #fff0bd;
+    box-shadow: 0 4px 0 #604b47, 0 7px 14px #0008;
+    pointer-events: auto;
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
+  }
+  .catch-controls .move-left { left: max(8px, env(safe-area-inset-left)); }
+  .catch-controls .move-right { right: max(8px, env(safe-area-inset-right)); }
+  .catch-controls button span { font-size: 22px; line-height: 1; }
+  .catch-controls button small { margin-top: 2px; font-size: 9px; font-weight: 800; }
+  .catch-controls button.active,
+  .catch-controls button:active { transform: translateY(3px); box-shadow: 0 1px 0 #604b47, 0 4px 9px #0007; }
+
+  /* Story controls remain above device safe areas. */
+  .short-story .vn-cast { inset: 1vh 0 88px; }
+  .short-story .vn-dialogue { bottom: max(6px, env(safe-area-inset-bottom)); min-height: 74px; padding: 12px 54px 10px 16px; }
+  .short-story .vn-text { font-size: clamp(12px, 3vh, 17px); line-height: 1.5; }
+  .short-story .vn-next { right: 10px; bottom: 12px; width: 38px; height: 38px; }
+
+  /* Wish editor stays two-column in landscape, but every control remains reachable. */
+  .story-wish-transition {
+    width: 100%;
+    height: 100svh;
+    min-height: 0;
+    overflow: hidden;
+    grid-template-columns: minmax(0, 1.12fr) minmax(190px, .72fr);
+    gap: 8px;
+    padding: max(7px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(7px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    text-align: left;
+  }
+  .story-wish-transition .wish-copy {
+    max-height: calc(100svh - 14px);
+    overflow-y: auto;
+    padding: 11px 14px;
+    border-radius: 16px;
+  }
+  .story-wish-transition .wish-copy > p { font-size: 10px; }
+  .story-wish-transition .wish-copy h1 { margin: 1px 0 4px; font-size: clamp(22px, 6vh, 34px); }
+  .story-wish-transition .wish-copy label { font-size: 10px; }
+  .story-wish-transition .wish-copy textarea { height: clamp(48px, 14vh, 76px); margin: 3px 0 5px; padding: 8px 10px; font-size: 12px; }
+  .story-wish-transition .wish-suggestions { margin: 4px 0; gap: 4px; justify-content: flex-start; }
+  .story-wish-transition .wish-suggestions button { padding: 5px 7px; font-size: 9px; }
+  .story-wish-transition .lantern-editor { margin: 3px 0 5px; padding: 5px 8px; }
+  .story-wish-transition .wish-meta { margin: 0 0 5px; font-size: 9px; }
+  .story-wish-transition #launch { padding: 8px 11px; font-size: 11px; }
+  .story-wish-transition .lantern-stage { height: 100%; min-height: 0; }
+  .story-wish-transition .wish-lantern { top: 50%; width: min(210px, 25vw); transform: translate(-50%, -50%); }
+
+  /* Score card fits in one landscape screen instead of being cropped. */
+  .summary-screen { width: 100%; height: 100svh; min-height: 0; padding: 8px; overflow: hidden; }
+  .summary-card {
+    width: min(760px, 94vw);
+    max-height: calc(100svh - 16px);
+    overflow-y: auto;
+    padding: 14px 22px;
+    border-radius: 20px;
+  }
+  .summary-oli { width: clamp(66px, 16vh, 105px); margin: -44px auto -9px; }
+  .summary-card > p { margin: 4px 0; font-size: 12px; }
+  .summary-card h1 { margin: 1px; font-size: clamp(36px, 10vh, 62px); line-height: 1; }
+  .rank-badge { margin: 5px auto; transform: scale(.86); transform-origin: center; }
+  .summary-stats { margin: 8px 0; gap: 6px; flex-wrap: nowrap; }
+  .summary-stats span { padding: 6px 9px; font-size: 11px; }
+  .summary-card blockquote { margin: 7px 0; padding: 7px 10px; font-size: 11px; line-height: 1.45; }
+  .summary-card .cta,
+  .summary-card .secondary { padding: 8px 12px; font-size: 11px; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .intro-story { width: min(58vw, 440px); }
+  .intro-story h1 { font-size: clamp(29px, 8.5vh, 42px); }
+  .intro-dialogue { max-height: 72px; overflow: hidden; }
+  .intro-oli { width: min(24vw, 170px) !important; }
+  .catch-stage .fall-zone > .player { width: clamp(72px, 14vh, 92px); }
+  .fall-zone { inset: 70px 0 48px; }
+  .catch-controls button { width: 52px; height: 52px; }
+  .summary-card { padding-block: 10px; }
+  .summary-oli { width: 70px; margin-top: -34px; }
+  .summary-stats { margin-block: 5px; }
+}
