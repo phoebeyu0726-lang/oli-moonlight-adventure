@@ -16,6 +16,11 @@ button { touch-action: manipulation; }
 textarea,
 input { -webkit-user-select: text; user-select: text; }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 .sound {
   appearance: none;
   display: grid;
@@ -29,10 +34,10 @@ input { -webkit-user-select: text; user-select: text; }
 /* Keep every written wish inside the lantern's two inner frame lines. */
 .wish-lantern span,
 .lantern-stage.cinematic .wish-lantern span {
-  top: 24%;
-  bottom: 20%;
-  left: 23%;
-  width: 54%;
+  top: 21%;
+  bottom: 23%;
+  left: 26%;
+  width: 48%;
   max-width: none;
   padding-top: 2%;
   display: flex;
@@ -43,6 +48,298 @@ input { -webkit-user-select: text; user-select: text; }
   word-break: break-all;
   overflow-wrap: anywhere;
   text-align: center;
+}
+
+/* iOS Safari exposes a smaller visual viewport while its toolbar is visible.
+   Use the JS-synchronised height and keep every SPA screen at scroll origin. */
+@media (orientation: landscape) and (max-height: 600px),
+       (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  html,
+  body {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  body { position: fixed; inset: 0; }
+  #app {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .sound {
+    position: fixed;
+    top: max(6px, env(safe-area-inset-top));
+    right: max(7px, env(safe-area-inset-right));
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+    z-index: 200;
+  }
+
+  /* Cover: a short composition that always leaves the entry button visible. */
+  .cover-screen {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    padding: 4px 10px 8px;
+    place-items: center;
+  }
+  .cover-content { margin-top: -2vh; }
+  .cover-content > p:first-child { margin-bottom: 3px; font-size: 11px; letter-spacing: .3em; }
+  .art-title span { font-size: clamp(50px, 17vh, 72px); }
+  .art-title strong { font-size: clamp(28px, 9vh, 40px); }
+  .title-ornament { margin: 7px auto 4px; }
+  .title-ornament b { font-size: 17px; }
+  .cover-subtitle { margin: 5px 0; font-size: 10px; line-height: 1.35; }
+  .cover-enter { margin-top: 5px; padding: 9px 20px; font-size: 12px; }
+  .cover-oli { right: 5vw; bottom: -3px; width: min(18vw, 118px); }
+
+  /* Game: two complete HUD rows, compact feedback and protected controls. */
+  .game-shell,
+  #gameMount,
+  .catch-stage {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .catch-hud {
+    position: absolute;
+    top: max(4px, env(safe-area-inset-top));
+    left: max(7px, env(safe-area-inset-left));
+    right: max(49px, calc(env(safe-area-inset-right) + 45px));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3px 5px;
+    height: 54px;
+  }
+  .catch-hud .hud-chip,
+  .catch-hud .hearts {
+    height: 29px;
+    min-width: 0;
+    padding: 2px 6px;
+    font-size: 11px;
+    border-radius: 9px;
+  }
+  .catch-hud .hearts { font-size: 13px; letter-spacing: 0; }
+  .catch-hud .combo-box,
+  .catch-hud .fever-meter {
+    position: static;
+    height: 20px;
+    min-width: 0;
+    width: auto;
+    margin: 0;
+    padding: 2px 6px;
+    border-radius: 8px;
+  }
+  .catch-hud .combo-box { grid-column: 1 / 3; }
+  .catch-hud .fever-meter { grid-column: 3; }
+  .catch-hud .combo-box span { font-size: 8px; }
+  .catch-hud .combo-box div,
+  .catch-hud .fever-meter div { height: 3px; }
+  .catch-hud .fever-meter b { font-size: 13px; }
+  .catch-message {
+    top: max(62px, calc(env(safe-area-inset-top) + 58px));
+    width: min(54vw, 460px);
+    min-height: 0;
+    padding: 4px 8px;
+    font-size: 9px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fall-zone { inset: 61px 0 43px; }
+  .catch-stage .fall-zone > .player { width: clamp(62px, 19vh, 78px); bottom: -3px; }
+  .fall-item { width: clamp(34px, 11vh, 48px); }
+  .item-super,
+  .item-golden { width: clamp(42px, 13vh, 56px); }
+  .catch-controls {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: var(--app-height, 100dvh);
+    pointer-events: none;
+  }
+  .catch-controls button {
+    position: absolute;
+    bottom: max(5px, env(safe-area-inset-bottom));
+    width: 48px;
+    height: 48px;
+    pointer-events: auto;
+  }
+  .catch-controls .move-left { left: max(7px, env(safe-area-inset-left)); }
+  .catch-controls .move-right { right: max(7px, env(safe-area-inset-right)); }
+  .catch-controls button span { font-size: 18px; }
+  .catch-controls button small { font-size: 8px; }
+  #toast {
+    bottom: max(5px, env(safe-area-inset-bottom));
+    max-width: 46vw;
+    padding: 6px 9px;
+    border-width: 1px;
+    border-radius: 10px;
+    font-size: 9px;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  /* Story: reserve the lower band without creating page scroll. */
+  .visual-novel,
+  .short-story {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+  }
+  .short-story .vn-cast { inset: 0 0 62px; }
+  .short-story .vn-dialogue {
+    left: max(7px, env(safe-area-inset-left));
+    right: max(7px, env(safe-area-inset-right));
+    bottom: max(5px, env(safe-area-inset-bottom));
+    translate: 0;
+    width: auto;
+    min-height: 54px;
+    padding: 9px 45px 7px 13px;
+    border-radius: 12px;
+  }
+  .short-story .vn-text { font-size: 11px; line-height: 1.4; }
+  .short-story .vn-next { right: 7px; bottom: 8px; width: 32px; height: 32px; }
+  .short-story .vn-story-lantern { bottom: 69px; }
+
+  /* Wish editor: no horizontal page scroll and all controls above the toolbar. */
+  .story-wish-transition {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.2fr) minmax(170px, .7fr);
+    gap: 6px;
+    padding: max(5px, env(safe-area-inset-top)) max(7px, env(safe-area-inset-right)) max(5px, env(safe-area-inset-bottom)) max(7px, env(safe-area-inset-left));
+    overflow: hidden;
+  }
+  .story-wish-transition .wish-copy {
+    width: 100%;
+    max-height: calc(var(--app-height, 100dvh) - 10px);
+    padding: 8px 11px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 13px;
+  }
+  .story-wish-transition .wish-copy > p { margin: 0 0 2px; font-size: 8px; }
+  .story-wish-transition .wish-copy h1 { margin: 0 0 3px; font-size: clamp(18px, 6vh, 25px); line-height: 1.15; }
+  .story-wish-transition .wish-copy label { font-size: 9px; }
+  .story-wish-transition .wish-copy textarea {
+    height: clamp(40px, 13vh, 54px);
+    min-height: 40px;
+    margin: 2px 0 3px;
+    padding: 6px 8px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .story-wish-transition .wish-suggestions { margin: 2px 0 3px; gap: 3px; }
+  .story-wish-transition .wish-suggestions button { padding: 4px 6px; font-size: 8px; }
+  .story-wish-transition .lantern-editor { margin: 2px 0 3px; padding: 4px 6px; }
+  .story-wish-transition .editor-row > b { flex-basis: auto; font-size: 9px; }
+  .story-wish-transition .color-dot { width: 24px; height: 24px; }
+  .story-wish-transition .wish-meta { margin: 0 0 3px; font-size: 8px; }
+  .story-wish-transition #launch { padding: 7px 9px; font-size: 9px; }
+  .story-wish-transition .lantern-stage { width: 100%; height: 100%; min-width: 0; overflow: hidden; }
+  .story-wish-transition .wish-lantern {
+    top: 50%;
+    width: min(176px, 22vw);
+    height: min(230px, 78vh);
+    transform: translate(-50%, -50%);
+  }
+
+  /* Score summary: fit every essential item into one Safari visual viewport. */
+  .summary-screen {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    padding: 4px;
+    overflow: hidden;
+  }
+  .summary-card {
+    width: min(700px, calc(100vw - 12px));
+    max-height: calc(var(--app-height, 100dvh) - 8px);
+    padding: 7px 14px 8px;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  .summary-oli { width: 42px; margin: -18px auto -8px; }
+  .summary-card > p { margin: 1px 0; font-size: 9px; }
+  .tier-badge { margin: 2px auto; padding: 4px 9px; gap: 5px; border-radius: 10px; }
+  .tier-badge > span { font-size: 17px; }
+  .tier-badge small { font-size: 7px; }
+  .tier-badge b { font-size: 12px; }
+  .summary-card h1 { margin: 0; font-size: clamp(27px, 9vh, 38px); line-height: 1; }
+  .summary-card h1 small { font-size: 9px; }
+  .summary-stats { margin: 4px 0; gap: 4px; flex-wrap: nowrap; }
+  .summary-stats span { padding: 4px 7px; font-size: 8px; }
+  .summary-card blockquote { margin: 4px 0; padding: 4px 7px; font-size: 8px; line-height: 1.3; }
+  .summary-card .cta { padding: 7px 10px; font-size: 9px; }
+
+  /* Final greeting: separate title, equal bubbles, characters and corner actions. */
+  .festival-ending {
+    width: 100%;
+    height: var(--app-height, 100dvh);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .ending-title { top: 2px; width: 58vw; }
+  .ending-title > span,
+  .ending-title p { display: none; }
+  .ending-title h1 { margin: 0; font-size: clamp(28px, 9vh, 38px); line-height: 1; letter-spacing: .05em; }
+  .ending-cast {
+    inset: 43px 7px 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    min-height: 0;
+  }
+  .festival-ending .cast-member { height: calc(var(--app-height, 100dvh) - 43px); min-height: 0; }
+  .character-bubble {
+    top: 0;
+    width: calc(100% - 8px);
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    padding: 5px 7px;
+    border-width: 1px;
+    border-radius: 10px 10px 10px 3px;
+    font-size: 8px;
+    line-height: 1.28;
+  }
+  .cast-member img,
+  .cast-brother img,
+  .cast-father img { height: min(57vh, 205px); max-width: 118%; }
+  .cast-phoebe img { height: min(55vh, 198px); max-width: 118%; }
+  .festival-ending .cast-oli .ending-oli { width: min(15vw, 92px); bottom: 42px; }
+  .festival-ending .ending-actions {
+    inset: auto max(6px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) auto;
+    flex-direction: row;
+    gap: 4px;
+  }
+  .festival-ending .ending-actions .cta,
+  .festival-ending .ending-actions .ending-link { min-width: 0; padding: 6px 8px; font-size: 8px; }
+
+  .result-modal { height: var(--app-height, 100dvh); padding: 5px; overflow: hidden; }
+  .result-modal .festival-result-card {
+    width: min(650px, calc(100vw - 12px));
+    max-height: calc(var(--app-height, 100dvh) - 10px);
+    overflow-y: auto;
+    padding: 9px 13px;
+    border-radius: 15px;
+  }
+  .festival-grade { margin: 3px 0; }
+  .festival-grade > span { width: 38px; height: 38px; font-size: 17px; }
+  .festival-grade h2 { font-size: 15px; }
+  .festival-comment,
+  .festival-blessing { margin: 3px 0; font-size: 9px; line-height: 1.35; }
+  .festival-stats { margin: 4px 0 !important; }
+  .festival-stats span { padding: 4px 6px; font-size: 8px; }
+  .festival-result-card blockquote { margin: 3px 0; padding: 4px 7px; font-size: 8px; }
+  .festival-result-card .result-actions button { padding: 6px 8px; font-size: 8px; }
 }
 
 @media (orientation: landscape) and (max-width: 1366px) and (max-height: 820px) {

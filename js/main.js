@@ -12,6 +12,27 @@ let sound = JSON.parse(localStorage.getItem('oliSound') ?? 'true');
 let game = null;
 const music = new FestivalMusic();
 
+function syncVisualViewport() {
+  const viewport = window.visualViewport;
+  const height = Math.round(viewport?.height || window.innerHeight);
+  const width = Math.round(viewport?.width || window.innerWidth);
+  document.documentElement.style.setProperty('--app-height', `${height}px`);
+  document.documentElement.style.setProperty('--app-width', `${width}px`);
+}
+
+function resetScreenPosition() {
+  syncVisualViewport();
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+syncVisualViewport();
+window.addEventListener('resize', syncVisualViewport, { passive: true });
+window.visualViewport?.addEventListener('resize', syncVisualViewport, { passive: true });
+window.visualViewport?.addEventListener('scroll', syncVisualViewport, { passive: true });
+new MutationObserver(() => requestAnimationFrame(resetScreenPosition)).observe(app, { childList: true });
+
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
 }[char]));
