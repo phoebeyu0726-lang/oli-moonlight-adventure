@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_PUBLISHABLE_KEY = '';
+const SUPABASE_URL = 'https://wyxvivoqzmgkuktcztqg.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_XU11yQujdQhqu8ej5x6SMA_Yp93KHO2';
 
 const DEVICE_KEY = 'oliMoonDeviceToken';
 const CACHE_KEY = 'oliCatchLeaderboard';
