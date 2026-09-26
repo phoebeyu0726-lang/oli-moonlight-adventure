@@ -16,10 +16,10 @@ export function playMoonStory({ root, onLantern, onComplete, sound = () => {} })
   function spriteStyle(character, pose) {
     if (character === 'oli') {
       const asset = OLI_POSE_ASSETS[pose] || OLI_POSE_ASSETS.normal;
-      return `--sprite:url('${asset}');--col:0;--row:0`;
+      return `--sprite:url('../${asset}');--col:0;--row:0`;
     }
     const index = poseIndex(character, pose);
-    return `--sprite:url('${STORY_ASSETS.characters[character]}');--col:${index % 4};--row:${Math.floor(index / 4)}`;
+    return `--sprite:url('../${STORY_ASSETS.characters[character]}');--col:${index % 4};--row:${Math.floor(index / 4)}`;
   }
 
   function mount() {

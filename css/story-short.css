@@ -430,3 +430,22 @@
 }
 
 @keyframes rotateDevice { 50% { rotate: 90deg; scale: 1.08; } }
+
+/* Keep the two final actions together at the lower-right, with Oli clearly above them. */
+.festival-ending .ending-actions {
+  position: absolute;
+  inset: auto 18px 18px auto;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: 8px;
+  z-index: 24;
+}
+.festival-ending .cast-oli .ending-oli { bottom: 68px; }
+
+@media (max-width: 1100px) and (max-height: 650px) and (orientation: landscape) {
+  .festival-ending .ending-actions { inset: auto 8px 8px auto; flex-direction: row; gap: 5px; }
+  .festival-ending .cast-oli .ending-oli { bottom: 54px; }
+}

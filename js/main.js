@@ -2,6 +2,7 @@ import { ASSETS } from './assets.js';
 import { CatchGame } from './catch-game.js';
 import { playMoonStory } from './story-player.js';
 import { FestivalMusic } from './music.js';
+import { claimPlayerName, fetchSharedLeaderboard, normalizeName, saveLocalBest, submitSharedScore } from './leaderboard.js';
 
 const app = document.querySelector('#app');
 const soundBtn = document.querySelector('#soundBtn');
@@ -14,7 +15,7 @@ const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (char) => (
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
 }[char]));
 
-const normalizePlayerName = (value = '') => String(value).trim().toLocaleLowerCase('zh-Hant');
+const normalizePlayerName = normalizeName;
 
 function ping(frequency = 560, duration = 0.09) {
   if (sound) music.chime(frequency, duration);
@@ -41,33 +42,11 @@ soundBtn.onclick = () => {
 };
 updateSound();
 
-function getLeaderboard() {
-  try {
-    const scores = JSON.parse(localStorage.getItem('oliCatchLeaderboard'));
-    if (!Array.isArray(scores)) return [];
-    const unique = new Map();
-    scores.forEach((entry) => {
-      const key = normalizePlayerName(entry?.name);
-      if (!key) return;
-      const saved = unique.get(key);
-      if (!saved || Number(entry.score || 0) > Number(saved.score || 0)) unique.set(key, entry);
-    });
-    return [...unique.values()].sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
-  } catch {
-    return [];
-  }
-}
-
-function isNameTaken(name) {
-  const key = normalizePlayerName(name);
-  return getLeaderboard().some((entry) => normalizePlayerName(entry.name) === key);
-}
-
-function leaderboardRows(scores, currentId = '') {
+function leaderboardRows(scores, currentName = '') {
   if (!scores.length) return '<div class="empty-score">月宮還在等第一位接餅高手！</div>';
   const medals = ['🥇', '🥈', '🥉'];
   return scores.slice(0, 8).map((entry, index) => `
-    <div class="leader-row ${entry.id === currentId ? 'current' : ''}">
+    <div class="leader-row ${normalizePlayerName(entry.name) === normalizePlayerName(currentName) ? 'current' : ''}">
       <b>${medals[index] || `#${index + 1}`}</b>
       <span>${escapeHtml(entry.name || '神秘旅人')}</span>
       <strong>${Number(entry.score || 0).toLocaleString()}</strong>
@@ -181,7 +160,7 @@ function wrapWish(text, size) {
   return lines.join('\n');
 }
 
-function showLeaderboard() {
+async function showLeaderboard(currentName = '') {
   const existing = app.querySelector('.score-modal');
   if (existing) existing.remove();
   app.insertAdjacentHTML('beforeend', `
@@ -192,13 +171,16 @@ function showLeaderboard() {
         <h2 id="scoreTitle">月宮得分榜</h2>
         <p>每一次接住，都是 Oli 尾巴努力搖出來的榮耀！</p>
         <div class="score-head"><span>名次</span><span>冒險者</span><span>月光值</span><span>最高連擊</span></div>
-        <div class="score-list">${leaderboardRows(getLeaderboard())}</div>
+        <div class="score-list"><div class="empty-score">正在向月宮取得最新排名…</div></div>
         <button class="cta score-done">繼續去接月餅</button>
       </section>
     </div>`);
   const close = () => app.querySelector('.score-modal')?.remove();
   app.querySelector('.score-close').onclick = close;
   app.querySelector('.score-done').onclick = close;
+  const scores = await fetchSharedLeaderboard();
+  const list = app.querySelector('.score-list');
+  if (list) list.innerHTML = leaderboardRows(scores, currentName);
 }
 
 function cover() {
@@ -247,19 +229,26 @@ function intro() {
       <div class="intro-hint"><span>← →</span> 左右移動，接住美味</div>
     </section>`;
 
-  app.querySelector('#startGame').onclick = () => {
+  app.querySelector('#startGame').onclick = async () => {
     const input = app.querySelector('#playerName');
     const name = input.value.trim();
     if (!name) return say('先幫月宮簽到，告訴我你的名字吧！');
-    if (isNameTaken(name)) {
+    const button = app.querySelector('#startGame');
+    button.disabled = true;
+    button.textContent = '🌕 正在向月宮報到…';
+    const claim = await claimPlayerName(name);
+    button.disabled = false;
+    button.textContent = '🥮 出發！開始接月餅';
+    if (!claim.ok && claim.reason === 'name_taken') {
       input.focus();
       input.select();
-      return say('這個名字已經被用過囉！換一個專屬名字吧～', 'urgent');
+      return say('這個名字已經在其他裝置使用囉！請換一個專屬名字～', 'urgent');
     }
+    if (!claim.ok) return say('月宮排行榜暫時連不上，請稍後再試一次～', 'urgent');
     localStorage.setItem('oliPlayer', name);
     start(name);
   };
-  app.querySelector('#showScores').onclick = showLeaderboard;
+  app.querySelector('#showScores').onclick = () => showLeaderboard();
   app.querySelector('#backCover').onclick = cover;
 }
 
@@ -490,24 +479,16 @@ function storyFinale(name, result, wishText) {
   app.querySelector('#receiveBlessing').onclick = () => ending(name, result, wishText);
 }
 
-function ending(name, result, wishText) {
+async function ending(name, result, wishText) {
   music.setTheme('story');
   const tier = getScoreTier(result.score);
   const copy = tierCopy(tier, result.score, result.remarkSeed || name.length);
   const finalBlessing = wishReply(wishText, result.score + (result.remarkSeed || 0));
-  const scores = getLeaderboard();
-  const nameKey = normalizePlayerName(name);
-  const existing = scores.find((entry) => normalizePlayerName(entry.name) === nameKey);
-  const id = existing?.id || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  if (!existing) {
-    scores.push({ id, name, score: result.score, combo: result.bestCombo, createdAt: Date.now() });
-  } else if (result.score > Number(existing.score || 0)) {
-    Object.assign(existing, { name, score: result.score, combo: result.bestCombo, createdAt: Date.now() });
-  }
-  scores.sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
-  const rank = scores.findIndex((entry) => entry.id === id) + 1;
-  const savedScores = scores.slice(0, 10);
-  localStorage.setItem('oliCatchLeaderboard', JSON.stringify(savedScores));
+  saveLocalBest(name, result.score, result.bestCombo);
+  await submitSharedScore(name, result.score, result.bestCombo);
+  const scores = await fetchSharedLeaderboard();
+  const rankIndex = scores.findIndex((entry) => normalizePlayerName(entry.name) === normalizePlayerName(name));
+  const rank = rankIndex >= 0 ? rankIndex + 1 : '—';
   const lines = {
     brother: randomDialogue('brother'),
     father: randomDialogue('father'),
@@ -555,7 +536,7 @@ function ending(name, result, wishText) {
           <div class="result-stats festival-stats">
             <span><b>${result.score.toLocaleString()}</b> 月光值</span>
             <span><b>×${result.bestCombo}</b> 最高連擊</span>
-            <span><b>#${rank}</b> 月宮排名</span>
+            <span><b>${rank === '—' ? rank : `#${rank}`}</b> 月宮排名</span>
           </div>
           <blockquote>「${escapeHtml(wishText)}」</blockquote>
           <p class="festival-blessing">${finalBlessing}</p>
@@ -574,7 +555,7 @@ function ending(name, result, wishText) {
   app.querySelector('.result-close').onclick = closeResult;
   app.querySelector('.result-backdrop').onclick = closeResult;
   app.querySelectorAll('#again').forEach((button) => button.onclick = () => start(name));
-  app.querySelector('#showScoresResult').onclick = showLeaderboard;
+  app.querySelector('#showScoresResult').onclick = () => showLeaderboard(name);
   app.querySelectorAll('.cast-member[data-character]').forEach((member) => {
     let previous = member.querySelector('.character-bubble span').textContent;
     const changeLine = () => {
